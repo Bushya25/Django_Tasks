@@ -1,0 +1,43 @@
+{% extends 'shop/layout/main.html' %}
+{% block title %}
+ShopKart! Online Shopping
+{% endblock title %}
+
+{% block content %}
+{% include 'shop/inc/slider.html' %}
+<div class="container" style="margin-top:70px;">
+    <div class="row">
+        <div class="col-12">   
+            <h4 class="mb-3">Latest Offers</h4>
+            <hr style="border-color:#bbbbbb;">
+        </div>
+    </div>
+    <div class="row">
+        {% for item in products %}
+        <div class="col-md-3"> <!-- Adjusted to fit 4 items in one row -->
+            <div class="card my-3">
+                <!-- Apply the custom class 'fixed-image' -->
+                <img src="{{ item.product_image.url }}" class="card-img-top fixed-image" alt="Categories">
+                <a href="{% url 'productdetailsviews' item.category.name item.name %}">
+                <div class="card-body">
+                   <h5 class="card-title text-primary">{{ item.name }}</h5>
+                   <p class="card-text">
+                      <span class="float-start oldprice"><s>RS.{{ item.original_price|stringformat:'d' }}</s></span>
+                      <span class="float-end newprice">RS.{{ item.selling_price|stringformat:'d' }}</span>
+                   </p> 
+                </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <style>
+        .fixed-image {
+            width: 100%; /* Adjust to card width */
+            height: 250px; /* Fixed height for uniformity */
+            object-fit: cover; /* Ensures images fit within the given dimensions */
+        }
+        </style>
+        
+</div>
+{% endblock content %}
