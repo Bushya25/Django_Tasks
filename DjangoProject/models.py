@@ -4,7 +4,7 @@ import datetime
 import os
 
 
-# Create your models here.
+
 def getFileName(request,filename):
     now_time=datetime.datetime.now().strftime("%Y%m%d%H:%M:%S")
     new_filename="%s%s"%(now_time,filename)
